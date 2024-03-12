@@ -27,14 +27,12 @@
 #api auto documentation can be accessed by 
   http://127.0.0.1:8000/docs
 
-#
-#runing fastapi app in background in linux machine
-#
+##START runing fastapi app in background in linux machine
 
-#create a service unit configuration file
+#1 create a service unit configuration file
   sudo nano /lib/systemd/system/z_fastapi_app1.service
 
-#add the below configuratiion in z_fastapi_app1.service file
+#2 add the below configuratiion in z_fastapi_app1.service file
   [Unit]
   Description=fast api app 1
   After=network.target
@@ -48,34 +46,34 @@
   [Install]
   WantedBy=multi-user.target
 
-#provide executable permission to file
+#3 provide executable permission to file
   sudo chmod 644 /lib/systemd/system/z_fastapi_app1.service
 
-#reload the demon and enable the service
+#4 reload the demon and enable the service
   sudo systemctl daemon-reload
   sudo systemctl enable z_fastapi_app1.service
 
 #below commands will help to know more about service 
 
-# get the status log of a service
+#get the status log of a service
 systemctl status z_fastapi_app1.service
 
-# start a service
+#start a service
 sudo systemctl start z_fastapi_app1.service
 
-# stop a service
+#stop a service
 sudo systemctl stop z_fastapi_app1.service
 
-# restart a service
+#restart a service
 sudo systemctl restart z_fastapi_app1.service
 
-# reload a service
+#reload a service
 sudo systemctl reload z_fastapi_app1.service
 
-# enable a service
+#enable a service
 sudo systemctl enable z_fastapi_app1.service
 
-# disable a service
+#disable a service
 sudo systemctl disable z_fastapi_app1.service
 
-
+##END runing fastapi app in background in linux machine
