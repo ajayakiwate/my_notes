@@ -1,0 +1,27 @@
+#for linux environment
+
+#create a new virtual environmrnt
+    python -m venv fapi_env
+
+#change to new virtual environment directory
+    cd fapi_env
+
+#activate environment by 
+    source bin/activate
+
+#deactivate virtual environment by 
+    deactivate
+
+#check which environment is active by
+    which python
+
+#install packages in the current active environment by
+#install all the packages for fastapi development
+    pip install "fastapi[all]"
+
+    or
+#uvicorn is server that runs fastapi code
+    pip install fastapi "uvicorn[standard]"
+
+#list all packages inside current environment by
+    pip list
