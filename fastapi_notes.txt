@@ -21,8 +21,8 @@
 #run the code with uvicorn server
   uvicorn fapi_app1:app --reload
 
-#to run app and accessible througout local network
-    uvicorn fapi_app1:app --reload --host 0.0.0.0
+#to run app and accessible througout local network and specific port
+    uvicorn fapi_app1:app --reload --host 0.0.0.0 --port 8000
 
 #api auto documentation can be accessed by 
   http://127.0.0.1:8000/docs
