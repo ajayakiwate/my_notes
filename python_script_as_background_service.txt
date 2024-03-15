@@ -1,0 +1,85 @@
+##START runing python script in background in linux machine
+
+#activate python environment
+source vir_env/vir_env_1/bin/activate
+
+#install required packages
+pip install schedule
+
+##write the required code
+##START code powerbank_time.py
+ 
+import schedule
+import time
+
+#write start time
+with open('powerbank_time.txt', 'a') as f:
+	f.write('start : ' + get_time() + '\n')
+
+def get_time():
+	#example '16:04:53 (15/03/24)'
+	return time.strftime('%X (%d/%m/%y)')
+
+def task():
+	with open('powerbank_time.txt', 'a') as f:
+		f.write('count : ' + get_time() + '\n')
+
+#schedule.every(1).minutes.do(task) 
+#schedule.every(3).seconds.do(task)
+schedule.every().minute.at(':00').do(task)
+
+while True:
+	schedule.run_pending()
+	time.sleep(1)
+
+##END code powerbank_time.py
+
+
+#1 create a service unit configuration file
+sudo nano /lib/systemd/system/z_powerbank_time.service
+
+#2 add the below configuratiion in z_powerbank_time.service file
+[Unit]
+Description=counting backup of powerbank 20000mah for RaspPI3
+After=network.target
+
+[Service]
+Type=idle
+Restart=on-failure
+User=root
+ExecStart=/bin/bash -c 'cd /home/ajay/Desktop/python && source vir_env/vir_env_1/bin/activate && cd powerbank && python powerbank_time.py'
+  
+[Install]
+WantedBy=multi-user.target
+
+#3 provide executable permission to file
+sudo chmod 644 /lib/systemd/system/z_powerbank_time.service
+
+#4 reload the demon and enable the service
+sudo systemctl daemon-reload
+sudo systemctl enable z_powerbank_time.service
+
+#below commands will help to know more about service 
+
+#get the status log of a service
+systemctl status z_powerbank_time.service
+
+#start a service
+sudo systemctl start z_powerbank_time.service
+
+#stop a service
+sudo systemctl stop z_powerbank_time.service
+
+#restart a service
+sudo systemctl restart z_powerbank_time.service
+
+#reload a service
+sudo systemctl reload z_powerbank_time.service
+
+#enable a service
+sudo systemctl enable z_powerbank_time.service
+
+#disable a service
+sudo systemctl disable z_powerbank_time.service
+
+##END runing python script in background in linux machine
