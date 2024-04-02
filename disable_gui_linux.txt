@@ -1,0 +1,8 @@
+#disable gui
+sudo systemctl set-default multi-user
+
+#system reboot
+reboot
+
+#enable gui
+sudo systemctl set-default graphical
